@@ -1,0 +1,10 @@
+README.md
+setup.cfg
+setup.py
+polygonX/__init__.py
+polygonX/example.py
+polygonX/polygonX.py
+polygonX.egg-info/PKG-INFO
+polygonX.egg-info/SOURCES.txt
+polygonX.egg-info/dependency_links.txt
+polygonX.egg-info/top_level.txt
