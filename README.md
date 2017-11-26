@@ -2,7 +2,7 @@
 
 The code is an implementation of the algorithm described in the paper Efficient generation of simple polygons for characterizing the shape of a set of points in the plane from Matt Duckham et al.
 
-### Installing
+## Installing
 
 
 ## Testing
