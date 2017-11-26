@@ -26,8 +26,9 @@ import matplotlib.pylab as plt
 
 points = np.random.rand(1000,2)
 edges = pgx.draw(points,l=0.05)
-for edge in edges:
-	plt.plot([points[edge[0]][0], points[edge[1]][0]], [points[edge[0]][1], points[edge[1]][1]], color='red')
+
+plt.scatter([x[0] for x in points],[x[1] for x in points])
+plt.plot([[points[edge[0]][0], points[edge[1]][0]] for edge in edges], [[points[edge[0]][1], points[edge[1]][1]] for edge in edges], color='red')
 plt.show()
 ```
 
