@@ -2,6 +2,13 @@
 
 Python implementation of the algorithm described in the paper [Efficient generation of simple polygons for characterizing the shape of a set of points in the plane](http://www.sciencedirect.com/science/article/pii/S0031320308001180) from Matt Duckham et al.
 
+## Introduction
+
+## Prerequisites
+
+* Scipy
+* Numpy (optional, used in the examples)
+
 ## Installing
 
 ```
@@ -10,7 +17,19 @@ cd PolygonX
 python setup.py install
 ```
 
-## Example
+## Examples
+
+```
+import numpy as np
+from polygonX import pgx
+import matplotlib.pylab as plt
+
+points = np.random.rand(1000,2)
+edges = pgx.draw(points,l=0.05)
+for edge in edges:
+	plt.plot([points[edge[0]][0], points[edge[1]][0]], [points[edge[0]][1], points[edge[1]][1]], color='red')
+plt.show()
+```
 
 An example is provided in the file example.py
 
