@@ -32,7 +32,7 @@ plt.plot([[points[edge[0]][0], points[edge[1]][0]] for edge in edges], [[points[
 plt.show()
 ```
 
-An example is provided in the file example.py
+Additional examples are provided in the file example.py
 
 ```
 python example.py
@@ -44,4 +44,4 @@ python example.py
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
