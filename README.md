@@ -30,9 +30,14 @@ edges = pgx.draw(points, l)
 ...
 ```
 
-Parameters :  points : List of all the points [(x1,y1),(x2,y2),...,(xn,yn)]
-              l : Maximum length of output edges. The smaller, the fitter will be the drawn shape 
-Returns :     edges : list of point index tuples
+**draw(points, l)**
+
+**Parameters:**  
+points : List of all the points `[(x1,y1),(x2,y2),...,(xn,yn)]`
+l : Maximum length of output edges. The smaller, the fitter will be the drawn shape.
+
+**Returns:**
+edges : list of point index tuples
 
 ## Examples
 
