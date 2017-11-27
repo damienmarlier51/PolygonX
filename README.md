@@ -34,8 +34,11 @@ for l in [0.05,0.1,0.2]:
 	plt.title('l = %.2f' % l)
 	plt.show()
 ```
-
-![Alt text](/PolygonX/output_images/0.05.png?raw=true "Optional Title")
+<p float="center">
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/0.05.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/0.10.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/0.2.png" width="33%"/>
+</p>
 
 Additional examples are provided in the file example.py
 
