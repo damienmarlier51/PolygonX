@@ -7,7 +7,8 @@ Python implementation of the algorithm described in the paper [Efficient generat
 ## Prerequisites
 
 * Scipy
-* Numpy (optional, used in the examples)
+* Numpy (optional, used in example 1)
+* Pandas (optional, used in example 2)
 
 ## Installing
 
@@ -37,23 +38,35 @@ for l in [0.05,0.1,0.2]:
 	plt.show()
 ```
 <p float="center">
-	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/0.05.png" width="33%"/>
-	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/0.10.png" width="33%"/>
-	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/0.2.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/0.05.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/0.10.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/0.20.png" width="33%"/>
 </p>
 
-Additional examples are provided in the file example.py
+Additional examples are provided in the folder example
+
+**Example 1** Draw shape around random C letter like distribution.
 
 ```
-python example.py
+python example_1.py
 ```
-
-Draw shape around random C letter like distribution.
 
 <p float="center">
-	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/c_0.01.png" width="33%"/>
-	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/c_0.05.png" width="33%"/>
-	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/c_0.1.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/c_0.01.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/c_0.05.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/c_0.10.png" width="33%"/>
+</p>
+
+**Example 2** Approximate French borders using French city coordinates.
+
+```
+python example_2.py
+```
+
+<p float="center">
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/f_0.50.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/f_1.00.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/f_3.00.png" width="33%"/>
 </p>
 
 ## Authors
