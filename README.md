@@ -19,6 +19,8 @@ python setup.py install
 
 ## Examples
 
+Draw shape around random 2D distribution.
+
 ```
 import numpy as np
 from polygonX import pgx
@@ -45,6 +47,14 @@ Additional examples are provided in the file example.py
 ```
 python example.py
 ```
+
+Draw shape around random C letter like distribution.
+
+<p float="center">
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/c_0.01.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/c_0.05.png" width="33%"/>
+	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/output_examples/c_0.1.png" width="33%"/>
+</p>
 
 ## Authors
 
