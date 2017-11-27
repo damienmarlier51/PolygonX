@@ -149,8 +149,16 @@ class Polygon:
 		
 		if d0>0:
 			theta = math.atan(d1/d0)
-		else:
+		elif d0<0:
 			theta = math.atan(d1/d0) + math.pi
+		elif d0==0:
+			if d1>0:
+				theta = 1/2*math.pi
+			elif d1<0:
+				theta = 3/2*math.pi
+			else:
+				theta = 0
+
 		theta /= math.pi
 		
 		return theta
