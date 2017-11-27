@@ -7,11 +7,11 @@ Python implementation of the algorithm described in the paper [Efficient generat
 Here is a description of the algorithm from the paper:
 
 <dl>
-<dd>(1) Generate the Delaunay triangulation of the set of input points P;
-(2) Remove the longest exterior edge from the triangulation such that:</dd>
+<dd>(1) Generate the Delaunay triangulation of the set of input points P; </br></dd>
+<dd>(2) Remove the longest exterior edge from the triangulation such that:
 	<dl><dd>(a) the edge to be removed is longer than the length parameter l; and </br>
 	(b) the exterior edges of the resulting triangulation form the boundary
-of a simple polygon</dd></dl>
+of a simple polygon</dd></dl></dd>
 <dd>(3) Repeat 2. as long as there are more edges to be removed</br>
 (4) Return the polygon formed by the exterior edges of the triangulation</dd>
 </dl>
