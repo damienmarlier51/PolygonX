@@ -4,6 +4,9 @@ Python implementation of the algorithm described in the paper [Efficient generat
 
 ## Introduction
 
+The algorithm is using the Delaunay triangulation of the points. Using a combinatorial map approach, the algorithm then identifies the boundary edges
+Complexity is in O(n*log(n)).
+
 ## Prerequisites
 
 * Scipy
@@ -17,6 +20,19 @@ git clone https://github.com/damienmarlier51/PolygonX.git
 cd PolygonX
 python setup.py install
 ```
+
+## Description 
+
+```
+from polygonX import pgx
+...
+edges = pgx.draw(points, l)
+...
+```
+
+Parameters :  points : List of all the points [(x1,y1),(x2,y2),...,(xn,yn)]
+              l : Maximum length of output edges. The smaller, the fitter will be the drawn shape 
+Returns :     edges : list of point index tuples
 
 ## Examples
 
@@ -43,9 +59,9 @@ for l in [0.05,0.1,0.2]:
 	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/0.20.png" width="33%"/>
 </p>
 
-Additional examples are provided in the folder example
+Additional examples are provided in the example folder.
 
-**Example 1** Draw shape around random C letter like distribution.
+**Example 1:** Draw shape around random C letter like distribution.
 
 ```
 python example_1.py
@@ -57,7 +73,7 @@ python example_1.py
 	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/c_0.10.png" width="33%"/>
 </p>
 
-**Example 2** Approximate French borders using French city coordinates.
+**Example 2:** Approximate French borders using French city coordinates.
 
 ```
 python example_2.py
@@ -75,4 +91,4 @@ python example_2.py
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details.
