@@ -36,6 +36,10 @@ python setup.py install
 
 Using pip:
 
+```
+pip install polygonX
+```
+
 ## Methods 
 
 ```
