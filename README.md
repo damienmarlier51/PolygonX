@@ -42,6 +42,8 @@ pip install polygonX
 
 ## Methods 
 
+One can call the draw method to generate the shape characterization polygon:
+
 ```
 from polygonX import pgx
 ...
