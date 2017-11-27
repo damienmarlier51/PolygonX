@@ -2,6 +2,13 @@
 
 Python implementation of the algorithm described in the paper [Efficient generation of simple polygons for characterizing the shape of a set of points in the plane](http://www.sciencedirect.com/science/article/pii/S0031320308001180) from Matt Duckham et al.
 
+## Introduction
+
+## Prerequisites
+
+* Scipy
+* Numpy (optional, used in the examples)
+
 ## Installing
 
 ```
@@ -10,38 +17,25 @@ cd PolygonX
 python setup.py install
 ```
 
-## Example
+## Examples
 
 ```
 import numpy as np
-import math
-import polygonX
 from polygonX import pgx
 import matplotlib.pylab as plt
 
-def L2_distance(a,b):
-	return math.sqrt(sum([(x-y)*(x-y) for (x,y) in zip(a,b)]))
+points = np.random.rand(1000,2)
+edges = pgx.draw(points,l=0.05)
 
-#This function plots a C-shape distribution
-def generate_c_shape_distribution(nb_points=1000, c_center=[0.5,0.5], c_inner_radius=0.1, c_outer_radius=0.2):
-	c_points = []
-	#Generate points till we get the desired number of points
-	while len(c_points)<nb_points:
-		point = np.random.rand(1,2)[0]
-		#Check whether generated point is in C shape
-		if point[0]<c_center[0] and L2_distance(point,c_center)>c_inner_radius and L2_distance(point,c_center)<c_outer_radius:
-			c_points.append(point)
-	return c_points
-
-l = 0.01
-c_points = generate_c_shape_distribution(1000, [0.5,0.5], 0.1, 0.2)
-#Plot generated points
-plt.scatter([x[0] for x in c_points],[x[1] for x in c_points])
-edges = pgx.draw(c_points,l)
-#Plot polygon edges
-for edge in edges:
-	plt.plot([c_points[edge[0]][0], c_points[edge[1]][0]], [c_points[edge[0]][1], c_points[edge[1]][1]], color='red')
+plt.scatter([x[0] for x in points],[x[1] for x in points])
+plt.plot([[points[edge[0]][0], points[edge[1]][0]] for edge in edges], [[points[edge[0]][1], points[edge[1]][1]] for edge in edges], color='red')
 plt.show()
+```
+
+Additional examples are provided in the file example.py
+
+```
+python example.py
 ```
 
 ## Authors
@@ -50,4 +44,4 @@ plt.show()
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
