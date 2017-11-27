@@ -36,7 +36,7 @@ python setup.py install
 
 Using pip
 
-## Description 
+## Methods 
 
 ```
 from polygonX import pgx
@@ -51,10 +51,10 @@ edges = pgx.draw(points, l)
 
 <dl>
 <dt><em>Parameters:</em></dt>
-<dd>points : List of all the points ```[(x1,y1),(x2,y2),...,(xn,yn)]```.</br>
+<dd>points : List of all the points [(x1,y1),(x2,y2),...,(xn,yn)].</br>
 l : Maximum length of output edges. The smaller, the fitter will be the drawn shape.</dd>
 <dt><em>Returns:</em></dt>
-<dd>edges : ordered list of index tuples ```[(i,j),(j,k),..]```.</dd>
+<dd>edges : ordered list of index tuples [(i,j),(j,k),..].</dd>
 </dl>
 
 ## Examples
