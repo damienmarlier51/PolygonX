@@ -1,10 +1,21 @@
 # PolygonX
 
-Python implementation of the algorithm described in the paper [Efficient generation of simple polygons for characterizing the shape of a set of points in the plane](http://www.sciencedirect.com/science/article/pii/S0031320308001180) from Matt Duckham et al.
+Python implementation of the algorithm described in the paper [Efficient generation of simple polygons for characterizing the shape of a set of points in the plane](http://www.sciencedirect.com/science/article/pii/S0031320308001180) from Matt Duckham et al (2008).
 
 ## Introduction
 
-The algorithm is using the Delaunay triangulation of the points. Using a combinatorial map approach, the algorithm then identifies the boundary edges
+Here is a description of the algorithm from the paper:
+
+<dl>
+<dd>(1) Generate the Delaunay triangulation of the set of input points P;
+(2) Remove the longest exterior edge from the triangulation such that:</dd>
+	<dl><dd>(a) the edge to be removed is longer than the length parameter l; and </br>
+	(b) the exterior edges of the resulting triangulation form the boundary
+of a simple polygon</dd></dl>
+<dd>(3) Repeat 2. as long as there are more edges to be removed</br>
+(4) Return the polygon formed by the exterior edges of the triangulation</dd>
+</dl>
+
 Complexity is in O(n*log(n)).
 
 ## Prerequisites
@@ -15,11 +26,15 @@ Complexity is in O(n*log(n)).
 
 ## Installing
 
+Using setup.py
+
 ```
 git clone https://github.com/damienmarlier51/PolygonX.git
 cd PolygonX
 python setup.py install
 ```
+
+Using pip
 
 ## Description 
 
@@ -30,14 +45,17 @@ edges = pgx.draw(points, l)
 ...
 ```
 
-###### draw(points, l)
+---
 
-**Parameters:**
-</br>points : List of all the points ```[(x1,y1),(x2,y2),...,(xn,yn)]```.
-</br>l : Maximum length of output edges. The smaller, the fitter will be the drawn shape.
+### draw(points, l)
 
-**Returns:**
-</br>edges : ordered list of index tuples ```[(i,j),(j,k),..]```.
+<dl>
+<dt><em>Parameters:</em></dt>
+<dd>points : List of all the points ```[(x1,y1),(x2,y2),...,(xn,yn)]```.</br>
+l : Maximum length of output edges. The smaller, the fitter will be the drawn shape.</dd>
+<dt><em>Returns:</em></dt>
+<dd>edges : ordered list of index tuples ```[(i,j),(j,k),..]```.</dd>
+</dl>
 
 ## Examples
 
