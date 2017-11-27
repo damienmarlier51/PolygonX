@@ -30,16 +30,14 @@ edges = pgx.draw(points, l)
 ...
 ```
 
-* **draw(points, l)**
+######draw(points, l)
 
-<p>
 **Parameters:**  
 </br>points : List of all the points ```[(x1,y1),(x2,y2),...,(xn,yn)]```
 </br>l : Maximum length of output edges. The smaller, the fitter will be the drawn shape.
 
 **Returns:**
 </br>edges : list of point index tuples
-</p>
 
 ## Examples
 
@@ -68,7 +66,7 @@ for l in [0.05,0.1,0.2]:
 
 Additional examples are provided in the example folder.
 
-###Example 1: Draw shape around random C letter like distribution.
+######Example 1: Draw shape around random C letter like distribution.
 
 ```
 python example_1.py
@@ -80,7 +78,7 @@ python example_1.py
 	<img src="https://github.com/damienmarlier51/PolygonX/blob/master/examples/output_examples/c_0.10.png" width="33%"/>
 </p>
 
-###Example 2: Approximate French borders using French city coordinates.
+######Example 2: Approximate French borders using French city coordinates.
 
 ```
 python example_2.py
