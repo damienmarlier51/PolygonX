@@ -2,12 +2,13 @@ import math
 from scipy.spatial import Delaunay
 from operator import itemgetter
 from .dart import Dart
+from .triangulation import Triangulation
 
 def distance(x,y):
 	return math.sqrt(math.fsum([(a-b)*(a-b) for a,b in zip(x,y)]))
 
 #Delaunay triangulation
-def triangularize(self,points):
+def triangularize(points):
 
 	edges = []
 
@@ -24,7 +25,7 @@ def triangularize(self,points):
 
 	#No need to compute the distance for all edges
 	for edge in edges:
-		edge.append(Polygon.distance(points[edge[0]],points[edge[1]]))
+		edge.append(distance(points[edge[0]],points[edge[1]]))
 
 	return edges
 
@@ -35,109 +36,92 @@ class Polygon:
 	darts = {}
 	vertex_boundary_dic = {}
 
-	def __init__(self):
-		self.points = []
+	def __init__(self,points=[]):
+		self.points = points
 
-	def draw(l=0.05):
+	def draw(self,l=0.05):
 
+		#1.1
 		points = self.points
 		edges = triangularize(points)
 		triangulation = Triangulation(edges=edges, points=points)
 
+		import matplotlib.pyplot as plt
+		plt.scatter([x[0] for x in points],[x[1] for x in points],s=1)
+		for edge in triangulation.edges:
+			plt.plot([points[edge[0]][0], points[edge[1]][0]], [points[edge[0]][1], points[edge[1]][1]], color='red')
+		plt.title('l = %.3f' % l)
+		plt.show()
+
 		for i,point in enumerate(points):
 			triangulation.vertex_boundary_dic[i] = False
 		
+		#1.2
 		boundary_edges = triangulation.get_boundary_edges()
-		
+
+		#1.3
+		boundary_edges = [x for x in sorted(boundary_edges, key=itemgetter(2))][::-1]
+
+		#1.4
 		for edge in boundary_edges:
 			triangulation.vertex_boundary_dic[edge[0]] = True
 			triangulation.vertex_boundary_dic[edge[1]] = True
 
-		#Sort boundary edges by distance
-		boundary_edges_remain = [x for x in boundary_edges if x[2] <= l]
-		boundary_edges = [x for x in sorted(boundary_edges, key=itemgetter(2))[::-1] if x[2] > l]
-
+		#1.9
 		while len(boundary_edges)>0:
 
-			#Get head of list
+			#1.10
 			boundary_edge = boundary_edges[0]
 
+			#1.11
 			if len(boundary_edges)>1:
 				boundary_edges = boundary_edges[1:]
 			else:
 				boundary_edges = []
 
-			dart = triangulation.get_dart(boundary_edge[1])
-			dart.set_direction(boundary_edge[0])
-			is_regular_bool, vertex = polygon.is_regular(dart)
+			#1.12
+			if boundary_edge[2]>l and triangulation.is_regular(boundary_edge):
+				
+				#1.13
+				new_edges = [x for x in triangulation.edges if x != boundary_edge]
+				new_triangulation = Triangulation(edges=triangulation.edges, points=triangulation.points, vertex_boundary_dic=triangulation.vertex_boundary_dic)
+				
+				#1.14				
+				dart1 = new_triangulation.get_dart(vertex=edge[0],direction=edge[1])
+				new_dart1 = new_triangulation.reveal(dart1)
+				edge1 = [new_dart1.vertex, new_dart1.direction, distance(points[new_dart1.vertex],points[new_dart1.direction])]
 
-			if is_regular_bool:
+				dart2 = new_triangulation.get_dart(vertex=edge[1],direction=edge[0])
+				new_dart2 = new_triangulation.reveal(dart2)
+				edge2 = [new_dart2.vertex, new_dart2.direction, distance(points[new_dart1.vertex],points[new_dart1.direction])]
 
-				#Add edge to B
-				edge = [boundary_edge[1],vertex]
-				edge.sort()
-				edge.append(Polygon.distance(polygon.points[edge[0]],polygon.points[edge[1]]))
+				iter_idx = 0
+				if len(boundary_edges)>0:
+					while boundary_edges[iter_idx][2]>edge1[2]:
+						iter_idx += 1
+						if iter_idx == len(boundary_edges):
+							break
+					boundary_edges.insert(iter_idx,edge1)
 
-				if edge[2]>l:
-					#insert edge
-					iter_idx = 0
-					if len(boundary_edges)>0:
-						while boundary_edges[iter_idx][2]>edge[2]:
-							iter_idx += 1
-							if iter_idx == len(boundary_edges):
-								break
-					boundary_edges.insert(iter_idx,edge)
-				else:
-					boundary_edges_remain.append(edge)
+				iter_idx = 0
+				if len(boundary_edges)>0:
+					while boundary_edges[iter_idx][2]>edge2[2]:
+						iter_idx += 1
+						if iter_idx == len(boundary_edges):
+							break
+					boundary_edges.insert(iter_idx,edge2)
 
-				#Add edge to B
-				edge = [boundary_edge[0],vertex]
-				edge.sort()
-				edge.append(Polygon.distance(polygon.points[edge[0]],polygon.points[edge[1]]))
+				#1.15
+				new_triangulation.vertex_boundary_dic[new_dart1.vertex] = True
 
-				if edge[2]>l:
-					#insert edge
-					iter_idx = 0
-					if len(boundary_edges)>0:
-						while boundary_edges[iter_idx][2]>edge[2]:
-							iter_idx += 1
-							if iter_idx == len(boundary_edges):
-								break
-					boundary_edges.insert(iter_idx,edge)
-				else:
-					boundary_edges_remain.append(edge)
+				triangulation = new_triangulation
 
-				#Update edges
-				polygon.edges = [x for x in polygon.edges if not (x[0]==boundary_edge[0] and x[1]==boundary_edge[1])]
-				polygon.vertex_boundary_dic[dart.direction] = True
-
-				del polygon.darts[boundary_edge[0]]
-				del polygon.darts[boundary_edge[1]]
-
-			else:
-
-				boundary_edges_remain.append(boundary_edge)
+		#1.16
+		boundary_edges = triangulation.get_boundary_edges()
 
 		import matplotlib.pyplot as plt
 		plt.scatter([x[0] for x in points],[x[1] for x in points],s=1)
-		for edge in boundary_edges_remain:
+		for edge in boundary_edges:
 			plt.plot([points[edge[0]][0], points[edge[1]][0]], [points[edge[0]][1], points[edge[1]][1]], color='red')
-		plt.title('l = %.2f' % l)
+		plt.title('l = %.3f' % l)
 		plt.show()
-
-		#Sort list to make it a connected chain
-		ordered_chain = []
-		vertex = boundary_edges_remain[0][0]
-		nb_boundary_edges = len(boundary_edges_remain)
-
-		while len(ordered_chain)!=nb_boundary_edges:
-			#Find vertex edge
-			edge = [[i,x] for i,x in enumerate(boundary_edges_remain) if x[0]==vertex or x[1]==vertex][0]
-			new_vertex = [x for x in edge[1] if x!=vertex][0]
-			ordered_chain.append([vertex,new_vertex])
-			prev_vertex = vertex
-			vertex = new_vertex
-			#Remove visited edge
-			boundary_edges_remain.pop(edge[0])
-
-		return ordered_chain
