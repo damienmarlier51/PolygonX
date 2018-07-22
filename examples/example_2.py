@@ -10,7 +10,7 @@ points = df[[1,2]].values
 polygon_ = polygon.Polygon(points=points)
 
 for l in [0.00001]:
-	edges = polygon_.draw(l)
+	edges = polygon.draw(points,l)
 
 	# plt.scatter([x[0] for x in points],[x[1] for x in points],s=1)
 	# for edge in edges:
