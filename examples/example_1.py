@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import math
-from polygonX import pgx
+from polygonX import polygon
 import matplotlib.pylab as plt
 
 def L2_distance(a,b):
@@ -18,13 +18,10 @@ def generate_c_shape_distribution(nb_points=1000, c_center=[0.5,0.5], c_inner_ra
 			c_points.append(point)
 	return c_points
 
-for l in [0.01,0.05,0.1]:
+for l in [0.005]:
 	c_points = generate_c_shape_distribution(1000, [0.5,0.5], 0.1, 0.2)
 	#Plot generated points
 	plt.scatter([x[0] for x in c_points],[x[1] for x in c_points])
-	edges = pgx.draw(c_points,l)
-	#Plot polygon edges
-	for edge in edges:
-		plt.plot([c_points[edge[0]][0], c_points[edge[1]][0]], [c_points[edge[0]][1], c_points[edge[1]][1]], color='red')
-	plt.title('l = %.2f' % l)
-	plt.show()
+	polygon_ = polygon.Polygon(points=c_points)
+	edges = polygon_.draw(l)
+	del polygon_
